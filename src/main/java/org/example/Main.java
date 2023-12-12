@@ -45,9 +45,6 @@ public class Main {
     private static String cleanStringForPath(String originPath) {
         String cleanPath = originPath
                 .replaceAll("__+", "_");
-        if (cleanPath.contains("__")) {
-            System.out.println(originPath);
-        }
         return cleanPath;
     }
 
