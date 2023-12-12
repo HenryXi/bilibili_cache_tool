@@ -36,21 +36,14 @@ public class Main {
         sb.append("tail -c +10 " + m4sFiles[0] + " > " + m4s1TmpFile1).append("\n");
         sb.append("tail -c +10 " + m4sFiles[1] + " > " + m4s1TmpFile2).append("\n");
         String finalFileName = cleanStringForPath(dirName + videoInfo.getTitle()) + ".mp4";
-        sb.append(ffmpegPath + " -i " + m4s1TmpFile1 + " -i " + m4s1TmpFile2 + " -codec copy " + finalFileName).append("\n");
+        sb.append(ffmpegPath + " -loglevel error -i " + m4s1TmpFile1 + " -i " + m4s1TmpFile2 + " -codec copy " + finalFileName).append("\n");
         sb.append("rm " + m4s1TmpFile1).append("\n");
         sb.append("rm " + m4s1TmpFile2).append("\n");
         return sb.toString();
     }
 
     private static String cleanStringForPath(String originPath) {
-        String cleanPath = originPath.replaceAll("\\s+", "_")
-                .replaceAll("\\.", "_")
-                .replaceAll("-", "_")
-                .replaceAll("\\(", "")
-                .replaceAll("\\)", "")
-                .replaceAll("\\+", "_")
-                .replaceAll(",", "_")
-                .replaceAll("\\|","_")
+        String cleanPath = originPath
                 .replaceAll("__+", "_");
         if (cleanPath.contains("__")) {
             System.out.println(originPath);

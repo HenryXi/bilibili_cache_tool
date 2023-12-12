@@ -23,7 +23,7 @@ public class VideoInfo {
     }
 
     public String getTitle() {
-        return title;
+        return clean(title);
     }
 
     public void setTitle(String title) {
@@ -31,10 +31,23 @@ public class VideoInfo {
     }
 
     public String getGroupTitle() {
-        return groupTitle;
+        return clean(groupTitle);
     }
 
     public void setGroupTitle(String groupTitle) {
         this.groupTitle = groupTitle;
     }
+
+    private String clean(String title){
+        return title.replaceAll("\\s+", "_")
+                .replaceAll("\\.", "_")
+                .replaceAll("-", "_")
+                .replaceAll("\\(", "")
+                .replaceAll("\\)", "")
+                .replaceAll("\\+", "_")
+                .replaceAll(",", "_")
+                .replaceAll("\\|","_")
+                .replaceAll("/","_");
+    }
+
 }
