@@ -38,7 +38,7 @@ public class VideoInfo {
         this.groupTitle = groupTitle;
     }
 
-    private String clean(String title){
+    private String clean(String title) {
         return title.replaceAll("\\s+", "_")
                 .replaceAll("\\.", "_")
                 .replaceAll("-", "_")
@@ -46,11 +46,12 @@ public class VideoInfo {
                 .replaceAll("\\)", "")
                 .replaceAll("\\+", "_")
                 .replaceAll(",", "_")
-                .replaceAll("\\|","_")
-                .replaceAll("&","_")
-                .replaceAll("\\[","_")
-                .replaceAll("]","_")
-                .replaceAll("/","_");
+                .replaceAll("\\|", "_")
+                .replaceAll("&", "_")
+                .replaceAll("\\[", "_")
+                .replaceAll("]", "_")
+                .replaceAll(";", "_")
+                .replaceAll("/", "_");
     }
 
 }

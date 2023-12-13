@@ -13,15 +13,34 @@ public class Main {
         String cachesPath = args[0];
         String targetPath = args[1];
         String scriptPath = args[2];
+        File scriptFile = new File(scriptPath);
         File[] allCacheVideos = new File(cachesPath).listFiles(f -> !f.getName().contains(".") && !f.getName().equals("load_log"));
-        for (File cacheVideoDir : allCacheVideos) {
+        FileUtils.writeStringToFile(scriptFile, "#! /bin/bash\n", Charset.defaultCharset(), true);
+        for (int i = 0; i < allCacheVideos.length; i++) {
+            File cacheVideoDir = allCacheVideos[i];
             File[] m4sFiles = cacheVideoDir.listFiles(f -> f.getName().contains(".m4s"));
             File[] videoInfo = cacheVideoDir.listFiles(f -> f.getName().contains(".videoInfo"));
             if (videoInfo == null || videoInfo.length == 0) {
                 continue;
             }
-            FileUtils.writeStringToFile(new File(scriptPath), convertCache(videoInfo[0], m4sFiles, targetPath), Charset.defaultCharset(), true);
+            FileUtils.writeStringToFile(scriptFile, convertCache(videoInfo[0], m4sFiles, targetPath), Charset.defaultCharset(), true);
+            FileUtils.writeStringToFile(scriptFile, progressBar(allCacheVideos.length, i), Charset.defaultCharset(), true);
         }
+        FileUtils.writeStringToFile(scriptFile, "echo -ne '\\n'", Charset.defaultCharset(), true);
+    }
+
+    private static String progressBar(int total, int index) {
+        StringBuilder sb = new StringBuilder("echo -ne '");
+        for (int i = 0; i < total; i++) {
+            if (i <= index) {
+                sb.append("#");
+            } else {
+                sb.append(" ");
+            }
+        }
+        sb.append(100*index/total).append("%");
+        sb.append("\\r'").append("\n");
+        return sb.toString();
     }
 
     private static String convertCache(File videoInfoFile, File[] m4sFiles, String targetPath) throws Exception {
