@@ -28,7 +28,7 @@ public class Main {
         }
         FileUtils.writeStringToFile(scriptFile, "echo -ne '\\n'", Charset.defaultCharset(), true);
     }
-
+    //todo make length fix
     private static String progressBar(int total, int index) {
         StringBuilder sb = new StringBuilder("echo -ne '");
         for (int i = 0; i < total; i++) {
