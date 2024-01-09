@@ -28,6 +28,7 @@ public class Main {
         }
         FileUtils.writeStringToFile(scriptFile, "echo -ne '\\n'", Charset.defaultCharset(), true);
     }
+
     //todo make length fix
     private static String progressBar(int total, int index) {
         StringBuilder sb = new StringBuilder("echo -ne '");
@@ -38,7 +39,7 @@ public class Main {
                 sb.append(" ");
             }
         }
-        sb.append(100*index/total).append("%");
+        sb.append(100 * index / total).append("%");
         sb.append("\\r'").append("\n");
         return sb.toString();
     }
@@ -54,7 +55,7 @@ public class Main {
         String m4s1TmpFile2 = targetPath + "/" + videoInfo.getItemId() + "_2.m4s";
         sb.append("tail -c +10 " + m4sFiles[0] + " > " + m4s1TmpFile1).append("\n");
         sb.append("tail -c +10 " + m4sFiles[1] + " > " + m4s1TmpFile2).append("\n");
-        String finalFileName = cleanStringForPath(dirName + videoInfo.getTitle()) + ".mp4";
+        String finalFileName = cleanStringForPath(dirName + videoInfo.getTitle() + "_" + videoInfo.getItemId()) + ".mp4";
         sb.append(ffmpegPath + " -loglevel error -y -i " + m4s1TmpFile1 + " -i " + m4s1TmpFile2 + " -codec copy " + finalFileName).append("\n");
         sb.append("rm " + m4s1TmpFile1).append("\n");
         sb.append("rm " + m4s1TmpFile2).append("\n");
