@@ -46,6 +46,7 @@ public class VideoInfo {
                 .replaceAll("\\)", "")
                 .replaceAll("\\+", "_")
                 .replaceAll(",", "_")
+                .replaceAll("'","_")
                 .replaceAll("\\|", "_")
                 .replaceAll("&", "_")
                 .replaceAll("\\\\", "_")

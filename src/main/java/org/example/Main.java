@@ -20,7 +20,7 @@ public class Main {
             File cacheVideoDir = allCacheVideos[i];
             File[] m4sFiles = cacheVideoDir.listFiles(f -> f.getName().contains(".m4s"));
             File[] videoInfo = cacheVideoDir.listFiles(f -> f.getName().contains(".videoInfo"));
-            if (videoInfo == null || videoInfo.length == 0) {
+            if (videoInfo == null || videoInfo.length == 0 || m4sFiles == null || m4sFiles.length == 0) {
                 continue;
             }
             FileUtils.writeStringToFile(scriptFile, convertCache(videoInfo[0], m4sFiles, targetPath), Charset.defaultCharset(), true);
@@ -28,6 +28,7 @@ public class Main {
         }
         FileUtils.writeStringToFile(scriptFile, "echo -ne '\\n'", Charset.defaultCharset(), true);
     }
+
     //todo make length fix
     private static String progressBar(int total, int index) {
         StringBuilder sb = new StringBuilder("echo -ne '");
@@ -38,7 +39,7 @@ public class Main {
                 sb.append(" ");
             }
         }
-        sb.append(100*index/total).append("%");
+        sb.append(100 * index / total).append("%");
         sb.append("\\r'").append("\n");
         return sb.toString();
     }
