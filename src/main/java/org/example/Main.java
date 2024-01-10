@@ -4,6 +4,8 @@ import com.google.common.io.Resources;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.List;
@@ -24,16 +26,18 @@ public class Main {
                 continue;
             }
             FileUtils.writeStringToFile(scriptFile, convertCache(videoInfo[0], m4sFiles, targetPath), Charset.defaultCharset(), true);
-            FileUtils.writeStringToFile(scriptFile, progressBar(allCacheVideos.length, i), Charset.defaultCharset(), true);
+            FileUtils.writeStringToFile(scriptFile, progressBar(allCacheVideos.length - 1, i), Charset.defaultCharset(), true);
         }
         FileUtils.writeStringToFile(scriptFile, "echo -ne '\\n'", Charset.defaultCharset(), true);
     }
 
-    //todo make length fix
     private static String progressBar(int total, int index) {
         StringBuilder sb = new StringBuilder("echo -ne '");
-        for (int i = 0; i < total; i++) {
-            if (i <= index) {
+        BigDecimal totalProgressLength = BigDecimal.valueOf(30);
+        BigDecimal currentProgressIndex = BigDecimal.valueOf(index).divide(BigDecimal.valueOf(total), 2, RoundingMode.UP)
+                .multiply(totalProgressLength);
+        for (int i = 0; i < totalProgressLength.intValue(); i++) {
+            if (i <= currentProgressIndex.intValue()) {
                 sb.append("#");
             } else {
                 sb.append(" ");
