@@ -26,7 +26,7 @@ public class Main {
                 continue;
             }
             FileUtils.writeStringToFile(scriptFile, convertCache(videoInfo[0], m4sFiles, targetPath), Charset.defaultCharset(), true);
-            FileUtils.writeStringToFile(scriptFile, progressBar(allCacheVideos.length - 1, i), Charset.defaultCharset(), true);
+            FileUtils.writeStringToFile(scriptFile, progressBar(allCacheVideos.length, i), Charset.defaultCharset(), true);
         }
         FileUtils.writeStringToFile(scriptFile, "echo -ne '\\n'", Charset.defaultCharset(), true);
     }
