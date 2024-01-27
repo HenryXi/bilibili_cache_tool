@@ -67,7 +67,7 @@ public class Main {
     }
 
     private static String cleanStringForPath(String originPath) {
-        return originPath.replaceAll("__+", "_");
+        return originPath.replaceAll("__+", "_").replaceAll("/","_");
     }
 
 }
