@@ -38,6 +38,11 @@ public class VideoInfo {
         this.groupTitle = groupTitle;
     }
 
+    /**
+     * '>
+     * @param title
+     * @return
+     */
     private String clean(String title) {
         return title.replaceAll("\\s+", "_")
                 .replaceAll("\\.", "_")
@@ -53,6 +58,11 @@ public class VideoInfo {
                 .replaceAll("\\[", "_")
                 .replaceAll("]", "_")
                 .replaceAll(";", "_")
+                .replaceAll(":", "_")
+                .replaceAll("<", "_")
+                .replaceAll(">", "_")
+                .replaceAll("\\|", "_")
+                .replaceAll("\\?", "_")
                 .replaceAll("\\*","_")
                 .replaceAll("/", "_");
     }
