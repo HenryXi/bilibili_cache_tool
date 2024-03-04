@@ -55,6 +55,9 @@ public class Main {
         String dirName = targetPath + "/" + cleanStringForPath(videoInfo.getGroupTitle()) + "/";
         sb.append("mkdir " + dirName + " >/dev/null 2>&1").append("\n");
         String ffmpegPath = Resources.getResource("ffmpeg").getPath();
+        if (ffmpegPath.contains("!")) {
+            ffmpegPath="ffmpeg";
+        }
         String m4s1TmpFile1 = targetPath + "/" + videoInfo.getItemId() + "_1.m4s";
         String m4s1TmpFile2 = targetPath + "/" + videoInfo.getItemId() + "_2.m4s";
         sb.append("tail -c +10 " + m4sFiles[0] + " > " + m4s1TmpFile1).append("\n");
